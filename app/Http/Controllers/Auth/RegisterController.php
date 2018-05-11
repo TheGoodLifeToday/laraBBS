@@ -48,13 +48,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name' => 'required|between:3,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name',
+            'email' => 'required|email',
             'password' => 'required|string|min:6|confirmed',
             'captcha' => 'required|captcha',
         ],[
             'captcha.required' => '验证码不能为空',
             'captcha.catcha' => '请输入正确的验证码',
+            'name.unique' => '用户名已被占用,请重新填写',
+            'name.regex' => '用户名只支持英文,数字,横杠和下划线',
+            'name.between' => '用户名必须介于3-25个字符之间',
+            'name.required' => '用户名不能为空',
         ]);
     }
 
