@@ -52,6 +52,7 @@ class RegisterController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:6|confirmed',
             'captcha' => 'required|captcha',
+            'avatar' => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200',
         ],[
             'captcha.required' => '验证码不能为空',
             'captcha.catcha' => '请输入正确的验证码',
@@ -59,6 +60,8 @@ class RegisterController extends Controller
             'name.regex' => '用户名只支持英文,数字,横杠和下划线',
             'name.between' => '用户名必须介于3-25个字符之间',
             'name.required' => '用户名不能为空',
+            'avatar.mimes' =>'头像必须是 jpeg, bmp, png, gif 格式的图片',
+            'avatar.dimensions' => '图片的清晰度不够，宽和高需要 200px 以上',
         ]);
     }
 
